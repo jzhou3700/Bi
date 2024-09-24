@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yupi.springbootinit.mapper.PostMapper">
+
+    <resultMap id="BaseResultMap" type="com.yupi.springbootinit.model.entity.Post">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="title" column="title" jdbcType="VARCHAR"/>
+            <result property="content" column="content" jdbcType="VARCHAR"/>
+            <result property="tags" column="tags" jdbcType="VARCHAR"/>
+            <result property="thumbNum" column="thumbNum" jdbcType="INTEGER"/>
+            <result property="favourNum" column="favourNum" jdbcType="INTEGER"/>
+            <result property="userId" column="userId" jdbcType="BIGINT"/>
+            <result property="createTime" column="createTime" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="updateTime" jdbcType="TIMESTAMP"/>
+            <result property="isDelete" column="isDelete" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,title,content,
+        tags,thumbNum,favourNum,
+        userId,createTime,updateTime,
+        isDelete
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from post
+        where  id = #{id,jdbcType=BIGINT} 
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from post
+        where  id = #{id,jdbcType=BIGINT} 
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.yupi.springbootinit.model.entity.Post" useGeneratedKeys="true">
+        insert into post
+        ( id,title,content
+        ,tags,thumbNum,favourNum
+        ,userId,createTime,updateTime
+        ,isDelete)
+        values (#{id,jdbcType=BIGINT},#{title,jdbcType=VARCHAR},#{content,jdbcType=VARCHAR}
+        ,#{tags,jdbcType=VARCHAR},#{thumbnum,jdbcType=INTEGER},#{favournum,jdbcType=INTEGER}
+        ,#{userid,jdbcType=BIGINT},#{createtime,jdbcType=TIMESTAMP},#{updatetime,jdbcType=TIMESTAMP}
+        ,#{isdelete,jdbcType=TINYINT})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.yupi.springbootinit.model.entity.Post" useGeneratedKeys="true">
+        insert into post
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="id != null">id,</if>
+                <if test="title != null">title,</if>
+                <if test="content != null">content,</if>
+                <if test="tags != null">tags,</if>
+                <if test="thumbnum != null">thumbNum,</if>
+                <if test="favournum != null">favourNum,</if>
+                <if test="userid != null">userId,</if>
+                <if test="createtime != null">createTime,</if>
+                <if test="updatetime != null">updateTime,</if>
+                <if test="isdelete != null">isDelete,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="id != null">#{id,jdbcType=BIGINT},</if>
+                <if test="title != null">#{title,jdbcType=VARCHAR},</if>
+                <if test="content != null">#{content,jdbcType=VARCHAR},</if>
+                <if test="tags != null">#{tags,jdbcType=VARCHAR},</if>
+                <if test="thumbnum != null">#{thumbnum,jdbcType=INTEGER},</if>
+                <if test="favournum != null">#{favournum,jdbcType=INTEGER},</if>
+                <if test="userid != null">#{userid,jdbcType=BIGINT},</if>
+                <if test="createtime != null">#{createtime,jdbcType=TIMESTAMP},</if>
+                <if test="updatetime != null">#{updatetime,jdbcType=TIMESTAMP},</if>
+                <if test="isdelete != null">#{isdelete,jdbcType=TINYINT},</if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.yupi.springbootinit.model.entity.Post">
+        update post
+        <set>
+                <if test="title != null">
+                    title = #{title,jdbcType=VARCHAR},
+                </if>
+                <if test="content != null">
+                    content = #{content,jdbcType=VARCHAR},
+                </if>
+                <if test="tags != null">
+                    tags = #{tags,jdbcType=VARCHAR},
+                </if>
+                <if test="thumbnum != null">
+                    thumbNum = #{thumbnum,jdbcType=INTEGER},
+                </if>
+                <if test="favournum != null">
+                    favourNum = #{favournum,jdbcType=INTEGER},
+                </if>
+                <if test="userid != null">
+                    userId = #{userid,jdbcType=BIGINT},
+                </if>
+                <if test="createtime != null">
+                    createTime = #{createtime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="updatetime != null">
+                    updateTime = #{updatetime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="isdelete != null">
+                    isDelete = #{isdelete,jdbcType=TINYINT},
+                </if>
+        </set>
+        where   id = #{id,jdbcType=BIGINT} 
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.yupi.springbootinit.model.entity.Post">
+        update post
+        set 
+            title =  #{title,jdbcType=VARCHAR},
+            content =  #{content,jdbcType=VARCHAR},
+            tags =  #{tags,jdbcType=VARCHAR},
+            thumbNum =  #{thumbnum,jdbcType=INTEGER},
+            favourNum =  #{favournum,jdbcType=INTEGER},
+            userId =  #{userid,jdbcType=BIGINT},
+            createTime =  #{createtime,jdbcType=TIMESTAMP},
+            updateTime =  #{updatetime,jdbcType=TIMESTAMP},
+            isDelete =  #{isdelete,jdbcType=TINYINT}
+        where   id = #{id,jdbcType=BIGINT} 
+    </update>
+</mapper>
