@@ -75,7 +75,7 @@ public class AiManager {
                     "{csv格式的原始数据，用,作为分隔符}\n" +
                     "请根据这两部分内容，严格按照以下指定格式生成内容（此外不要输出任何多余的开头、结尾、注释）同时不要使用这个符号 '】'\n" +
                     "'【【【【【'\n" +
-                    "{前端 Echarts V5 的 option 配置对象 JSON 代码, 不要生成任何多余的内容，比如注释和代码块标记}\n" +
+                    "{前端 Echarts V5 的 option 配置对象 JSON 代码, 不要生成任何多余的内容，比如注释和代码块标记，注意需要生成的字符串能够被JSON的parse方法解析}\n" +
                     "'【【【【【'\n" +
                     "{明确的数据分析结论、越详细越好，不要生成多余的注释} \n"
                     + "下面是一个具体的例子的模板："
@@ -101,7 +101,7 @@ public class AiManager {
         // 同步调用
         SparkSyncChatResponse chatResponse = sparkClient.chatSync(sparkRequest);
         String responseContent = chatResponse.getContent();
-        log.info("星火 AI 返回的结果 {}", responseContent);
+//        log.info("星火 AI 返回的结果 {}", responseContent);
         return responseContent;
     }
 }

@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class BiResponse {
 
-    private int chartId;
+    private Long chartId;
 
     private String genChart;
 

@@ -24,4 +24,8 @@
         userId,createTime,updateTime,
         isDelte
     </sql>
+
+    <select id="queryChartData" parameterType="string" resultType="hashmap">
+        select * from chart_#{chartId}
+    </select>
 </mapper>
